@@ -1,0 +1,14 @@
+{
+    "iconDefinitions": {
+        "_file_myColor": {
+            "iconPath": "./icons/myIcon.svg"
+        }
+    },
+    "file": "_file_myColor",
+    "fileExtensions": {
+        "txt": "_file_myColor"
+    },
+    "fileNames": {
+        "README.md": "_file_myColor"
+    }
+}
