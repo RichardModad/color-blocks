@@ -16,13 +16,32 @@ export function activate(context: vscode.ExtensionContext) {
             placeHolder: 'Select a color'
         });
 
+        let fileDecorationMappings: Map<string, {color: string, ranges: vscode.Range[]}> = new Map();
+
+        // Modify the 'showColorPicker' command to also store the selected color in the new map
         if (selectedColor) {
             const decoration = vscode.window.createTextEditorDecorationType({
                 backgroundColor: selectedColor
             });
             editor.setDecorations(decoration, [editor.selection]);
             decorationMappings.set(decoration, [editor.selection]);
+            fileDecorationMappings.set(editor.document.uri.fsPath, { color: selectedColor, ranges: [editor.selection] });
         }
+
+        // Use the 'onDidChangeActiveTextEditor' event to restore decorations
+        vscode.window.onDidChangeActiveTextEditor(editor => {
+            if (editor) {
+                const filePath = editor.document.uri.fsPath;
+                const savedDecorations = fileDecorationMappings.get(filePath);
+                if (savedDecorations) {
+                    const decoration = vscode.window.createTextEditorDecorationType({
+                        backgroundColor: savedDecorations.color
+                    });
+                    editor.setDecorations(decoration, savedDecorations.ranges);
+                    decorationMappings.set(decoration, savedDecorations.ranges);
+                }
+            }
+        });
     });
 
     let removeBackgroundColor = vscode.commands.registerCommand('extension.removeBackgroundColor', () => {
