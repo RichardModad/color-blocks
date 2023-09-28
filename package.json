@@ -17,15 +17,15 @@
 		"commands": [
 			{
 				"command": "extension.changeBackgroundColor",
-				"title": "Change Background Color"
+				"title": "🟢 Change Background Color"
 			},
 			{
 				"command": "extension.removeBackgroundColor",
-				"title": "Remove Background Color"
+				"title": "🔺 Remove Background Color"
 			},
 			{
 				"command": "extension.toggleColorsVisibility",
-				"title": "Toggle Colors Visibility"
+				"title": "🟪 Toggle Colors Visibility"
 			}
 		],
 		"menus": {
@@ -44,6 +44,7 @@
 				}
 			]
 		}
+		
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
