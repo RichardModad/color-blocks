@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        const colors = ['black', 'gray', 'darkgray', 'navy', 'slategray'];
+        const colors = ['black', 'gray', 'darkgray', 'navy', 'slategray', 'darkgreen', 'darkred', 'darkblue', 'darkmagenta', 'darkcyan', 'darkslategray', 'darkorange'];
         const selectedColor = await vscode.window.showQuickPick(colors, {
             placeHolder: 'Select a color'
         });
