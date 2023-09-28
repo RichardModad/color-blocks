@@ -1,9 +1,29 @@
 import * as vscode from 'vscode';
 
 let decorationMappings: Map<vscode.TextEditorDecorationType, vscode.Range[]> = new Map();
+let fileDecorationMappings: Map<string, { color: string, ranges: vscode.Range[] }> = new Map();
 let colorsHidden: boolean = false;
-
+    
 export function activate(context: vscode.ExtensionContext) {
+
+    vscode.window.onDidChangeActiveTextEditor(editor => {
+        if (editor) {
+            const filePath = editor.document.uri.fsPath;
+            const savedDecorations = fileDecorationMappings.get(filePath);
+            if (savedDecorations) {
+                // Dispose old decorations
+                decorationMappings.forEach((_, decoration) => decoration.dispose());
+                decorationMappings.clear();
+
+                // Apply the saved decorations
+                const decoration = vscode.window.createTextEditorDecorationType({
+                    backgroundColor: savedDecorations.color
+                });
+                editor.setDecorations(decoration, savedDecorations.ranges);
+                decorationMappings.set(decoration, savedDecorations.ranges);
+            }
+        }
+    });
 
     let showColorPicker = vscode.commands.registerCommand('extension.changeBackgroundColor', async () => {
         const editor = vscode.window.activeTextEditor;
