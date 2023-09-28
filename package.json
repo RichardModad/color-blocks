@@ -17,16 +17,23 @@
 		"commands": [
 			{
 				"command": "extension.changeBackgroundColor",
-				"title": "🟢 Change Background Color"
+				"group": "background",
+				"title": "🟢 Change Background Color",
+				"order": "1"
 			},
 			{
 				"command": "extension.removeBackgroundColor",
-				"title": "🔺 Remove Background Color"
+				"group": "background",
+				"title": "🟥 Remove Background Color",
+				"order": "2"
 			},
 			{
 				"command": "extension.toggleColorsVisibility",
-				"title": "🟪 Toggle Colors Visibility"
+				"group": "background",
+				"title": "🟣 Toggle Colors Visibility",
+				"order": "3"
 			}
+			
 		],
 		"menus": {
 			"editor/context": [
